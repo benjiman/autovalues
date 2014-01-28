@@ -57,10 +57,8 @@ public class AutoValueTest {
         String quack();
         public static Noisy create(String noise) {
             return new Noisy() {
-                public String quack() {
-                    return noise;
-                }
-            };
+                public String quack() { return noise; }
+            }.toValueType();
         }
     }
 
