@@ -3,7 +3,7 @@ package uk.co.benjiweber.autovalues;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class AutoValueTest {
+public class AutoValueReflectiveInterfaceTest {
 
     interface Person extends ValueType<Person> {
         String name();
@@ -14,6 +14,20 @@ public class AutoValueTest {
                 public int id() { return id; }
             }.toValueType();
         }
+    }
+
+    interface Foo extends Tuple3<String, Integer, String> {
+        default String name() { return values().first(); }
+        default Integer number() { return values().second(); }
+        default String bar() { return values().third(); }
+
+        static Foo create(String name, Integer number, String bar) {
+            return () -> Tuple3.create(name, number, bar);
+        }
+    }
+
+    @Test public void foo() {
+
     }
 
     @Test public void property_example() {
